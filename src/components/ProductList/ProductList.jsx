@@ -18,6 +18,7 @@ function ProductList() {
   const handleProductView = (productId) => {
     const selectedProduct = allProductsData.filter((f) => f.id === productId);
     setClickedProduct(selectedProduct);
+    setPopupopen(true);
   };
   useEffect(() => {
     storeAllProductsData();
