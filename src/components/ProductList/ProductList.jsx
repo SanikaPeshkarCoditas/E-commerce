@@ -5,10 +5,17 @@ function ProductList() {
   const [allProductsData, setallProductsData] = useState([]);
   const [isPopupOpen, setPopupopen] = useState(false);
   const [clickedProduct, setClickedProduct] = useState([]);
+
+const [cartData,setCartData]=useState([])
   const storeAllProductsData = () => {
     const productsObject = getAllProducts();
 
     setallProductsData(productsObject.products);
+  };
+
+  const handleAddtoCart = (productId) => {
+    const addedProduct = allProductsData.filter((f) => f.id === productId);
+    setCartData([...cartData,addedProduct]);
   };
 
   const handlePopupClose = () => {
@@ -31,6 +38,7 @@ function ProductList() {
             <ProductCard
               productEach={productEach}
               handleProductView={handleProductView}
+              handleAddtoCart={handleAddtoCart}
             />
           );
         })}
@@ -38,7 +46,7 @@ function ProductList() {
 
       {isPopupOpen && (
         <Popup onCLose={handlePopupClose}>
-          <ProductView productClicked={productClicked} />
+          <ProductView productClicked={clickedProduct} />
         </Popup>
       )}
     </>
